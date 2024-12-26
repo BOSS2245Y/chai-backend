@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js"
 import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
+import mongoose  from "mongoose"
 import jwt from "jsonwebtoken"
 
 
@@ -48,6 +49,7 @@ const registerUser = asyncHandler(async (req, res) => {
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar file is required")
     }
+    
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
@@ -283,6 +285,7 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
 
 const updateUserAvatar = asyncHandler(async (req, res) => {
     const avatarLocalPath = req.file?.path
+    console.log("avatarPath",avatarLocalPath)
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar file is missing")
     }
@@ -439,7 +442,7 @@ const getWatchHistory = asyncHandler(async ( req,res) => {
                                     $project:{
                                         fullName:1,
                                         username:1,
-                                        avatar:1,
+                                        avatar:1
                                     }
                                 }
                             ]

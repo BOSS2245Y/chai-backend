@@ -9,9 +9,9 @@ const videoSchema = new Schema({
 
 
     },
-    thumbnail:{
+    thumbnailFile:{
         type:String,
-        required:true,
+       
     },
     title:{
         type:String,
